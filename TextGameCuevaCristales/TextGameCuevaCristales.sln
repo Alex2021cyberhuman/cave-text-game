@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30503.244
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextGameCuevaCristales.Game", "TextGameCuevaCristales.Game\TextGameCuevaCristales.Game.csproj", "{122D9234-CAAC-4CDE-9E55-4F51A0341C10}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextGameCuevaCristales.Models", "TextGameCuevaCristales.Models\TextGameCuevaCristales.Models.csproj", "{2ACED37D-F751-41EE-B7DA-FBBEAB0DCBFB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{122D9234-CAAC-4CDE-9E55-4F51A0341C10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{122D9234-CAAC-4CDE-9E55-4F51A0341C10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{122D9234-CAAC-4CDE-9E55-4F51A0341C10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{122D9234-CAAC-4CDE-9E55-4F51A0341C10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2ACED37D-F751-41EE-B7DA-FBBEAB0DCBFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2ACED37D-F751-41EE-B7DA-FBBEAB0DCBFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2ACED37D-F751-41EE-B7DA-FBBEAB0DCBFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2ACED37D-F751-41EE-B7DA-FBBEAB0DCBFB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FC072475-0F55-4822-B50E-4F0541A55688}
+	EndGlobalSection
+EndGlobal
