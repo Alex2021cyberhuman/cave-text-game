@@ -1,14 +1,87 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Threading.Tasks;
+
 namespace TextGameCuevaCristales.Models
 {
     public class GameCycle
     {
-        public void CreateSimpleCave()
+        public async Task CreateCaveFromFiles(string itemsFileName, string endsFileName, string roomsFileName, string waysFileName)
+        {
+            Item GetItem(int id) => Items.First(x => x.Id == id);
+            Room GetRoom(int id) => Rooms.First(x => x.Id == id);
+            GameEnd GetEnd(int id) => Ends.First(x => x.Id == id);
+
+            
+            var opt = new JsonSerializerOptions();
+            opt.WriteIndented = true;
+            opt.Encoder = System.Text.Encodings.Web.JavaScriptEncoder.Create(System.Text.Unicode.UnicodeRanges.All);
+            using (StreamReader sr = new StreamReader(itemsFileName))
+            {
+                string json = await sr.ReadToEndAsync();
+                Items = JsonSerializer.Deserialize<List<Item>>(json, opt);
+            }
+            using (StreamReader sr = new StreamReader(endsFileName))
+            {
+                string json = await sr.ReadToEndAsync();
+                Ends = JsonSerializer.Deserialize<List<GameEnd>>(json, opt);
+            }
+            using (StreamReader sr = new StreamReader(roomsFileName))
+            {
+                string json = await sr.ReadToEndAsync();
+                Rooms = JsonSerializer.Deserialize<List<Room>>(json, opt);
+            }
+            using (StreamReader sr = new StreamReader(waysFileName))
+            {
+                string json = await sr.ReadToEndAsync();
+                Ways = JsonSerializer.Deserialize<List<Way>>(json, opt);
+            }
+
+            foreach (var room in Rooms)
+            {
+                if (room.ItemsId != null)
+                {
+                    room.Items = new List<Item>();
+                    foreach (var itemId in room.ItemsId)
+                    {
+                        room.Items.Add(GetItem(itemId));
+                    }
+                }
+                if (room.EndId != int.MinValue)
+                {
+                    room.End = GetEnd(room.EndId);
+                }
+            }
+
+            foreach (var way in Ways)
+            {
+                if (way.FromId != int.MinValue)
+                {
+                    way.From = GetRoom(way.FromId);
+                }
+                if (way.ToId != int.MinValue)
+                {
+                    way.To = GetRoom(way.ToId);
+                }
+            }
+
+            Player = new Player()
+            {
+                CurrentRoom = Rooms.First(x => x.Id == 1),
+                Items = new List<Item>(),
+                StepCount = 0
+            };
+
+
+        }
+
+        public async Task CreateSimpleCaveAsync()
         {
             Item GetItem(int id) => Items.First(x => x.Id == id);
             Room GetRoom(int id) => Rooms.First(x => x.Id == id);
@@ -72,68 +145,69 @@ namespace TextGameCuevaCristales.Models
                 {
                     Id = 2, Name = "Пещера с топором",
                     Description = "Мрачное подземелье. На полу лежит ржавый топор. Вы его подобрали.",
-                    Items = new List<Item>() {GetItem(2)}
+                    ItemsId = new List<int>() {2}
+                    
                 },
                 new Room()
                 {
                     Id = 3, Name = "Комната с копьем",
                     Description = "Вы оказались в комнате. Темно, Но вы смогли найти копье.",
-                    Items = new List<Item>() {GetItem(1)}
+                    ItemsId = new List<int>() {1}
                 },
                 new Room()
                 {
                     Id = 4, Name = "Лагерь разбойника",
                     Description = "Вы оказались в мрачном подземелье. В этом зале расхититель гробниц устроил лаагерь.",
-                    End = GetEnd(1)                 
+                    EndId =1               
                 },
                 new Room()
                 {
                     Id = 5, Name = "Комната с ключем А",
                     Description = "Вы оказались в мрачном подземелье.",
-                    Items = new List<Item>() {GetItem(3)}
-                   
+                    ItemsId = new List<int>() {3}
+
                 },
                 new Room()
                 {
                     Id = 6, Name = "Комната с медведем",
                     Description = "Вы оказались в мрачном подземелье.",
-                    End = GetEnd(2)
+                    EndId = 2
                 },
                 new Room()
                 {
                     Id = 7, Name = "Выход",
                     Description = "Вы оказались в мрачном подземелье.",
-                    End = GetEnd(5)
+                    EndId = 5
                 },
                 new Room()
                 {
                     Id = 8, Name = "Антидот",
                     Description = "Вы оказались в мрачном подземелье.",
-                    Items = new List<Item>() {GetItem(4)}
+                    ItemsId = new List<int>() {4}
                 },
                 new Room()
                 {
                     Id = 9, Name = "Призрак",
                     Description = "Вы оказались в мрачном подземелье.",
-                    End = GetEnd(4)
+                    EndId = 4
                 },
                 new Room()
                 {
                     Id = 10, Name = "Мутант",
                     Description = "Вы оказались в мрачном подземелье.",
-                    End = GetEnd(3)
+                    EndId = 3
                 },
                 new Room()
                 {
                     Id = 11, Name = "Алтарь",
                     Description = "Вы оказались в мрачном подземелье.",
-                    Items = new List<Item>() {GetItem(5)}
+                    ItemsId = new List<int>() {5}
                 },
                 new Room()
                 {
                     Id = 12, Name = "Kopie",
                     Description = "Вы оказались в мрачном подземелье.",
-                    Items = new List<Item>() {GetItem(1)}
+                    ItemsId = new List<int>() {1}
                 }
             };
 
@@ -142,8 +216,8 @@ namespace TextGameCuevaCristales.Models
                 new Way()
                 {
                     Id = 1,
-                    From = GetRoom(1),
-                    To = GetRoom(2),
+                    FromId = (1),
+                    ToId = (2),
                     InsideDescription = "go",
                     OutsideDescription = "topoe",
                     Name = "][][][",
@@ -152,8 +226,8 @@ namespace TextGameCuevaCristales.Models
                 new Way()
                 {
                     Id = 2,
-                    From = GetRoom(2),
-                    To = GetRoom(3),
+                    FromId = (2),
+                    ToId = (3),
                     InsideDescription = "xxx",
                     OutsideDescription = "копье",
                     Name = "][][][",
@@ -162,8 +236,8 @@ namespace TextGameCuevaCristales.Models
                 new Way()
                 {
                     Id = 3,
-                    From = GetRoom(2),
-                    To = GetRoom(4),
+                    FromId = (2),
+                    ToId = (4),
                     InsideDescription = "xxx",
                     OutsideDescription = "разб",
                     Name = "][][][",
@@ -172,8 +246,8 @@ namespace TextGameCuevaCristales.Models
                 new Way()
                 {
                     Id = 4,
-                    From = GetRoom(4),
-                    To = GetRoom(5),
+                    FromId = (4),
+                    ToId = (5),
                     InsideDescription = "xxx",
                     OutsideDescription = "к комнате а",
                     Name = "][][][",
@@ -182,8 +256,8 @@ namespace TextGameCuevaCristales.Models
                 new Way()
                 {
                     Id = 5,
-                    From = GetRoom(5),
-                    To = GetRoom(6),
+                    FromId = (5),
+                    ToId = (6),
                     InsideDescription = "xxx",
                     OutsideDescription = "medved",
                     Name = "][][][",
@@ -192,8 +266,8 @@ namespace TextGameCuevaCristales.Models
                 new Way()
                 {
                     Id = 6,
-                    From = GetRoom(6),
-                    To = GetRoom(7),
+                    FromId = (6),
+                    ToId = (7),
                     InsideDescription = "xxx",
                     OutsideDescription = "vihod",
                     Name = "][][][",
@@ -202,8 +276,8 @@ namespace TextGameCuevaCristales.Models
                 new Way()
                 {
                     Id = 7,
-                    From = GetRoom(5),
-                    To = GetRoom(8),
+                    FromId = (5),
+                    ToId = (8),
                     InsideDescription = "xxx",
                     OutsideDescription = "ant",
                     Name = "][][][",
@@ -212,8 +286,8 @@ namespace TextGameCuevaCristales.Models
                 new Way()
                 {
                     Id = 8,
-                    From = GetRoom(8),
-                    To = GetRoom(9),
+                    FromId = (8),
+                    ToId = (9),
                     InsideDescription = "xxx",
                     OutsideDescription = "prizrak",
                     Name = "][][][",
@@ -222,8 +296,8 @@ namespace TextGameCuevaCristales.Models
                 new Way()
                 {
                     Id = 9,
-                    From = GetRoom(9),
-                    To = GetRoom(12),
+                    FromId = (9),
+                    ToId = (12),
                     InsideDescription = "xxx",
                     OutsideDescription = "kopie 2",
                     Name = "][][][",
@@ -232,8 +306,8 @@ namespace TextGameCuevaCristales.Models
                 new Way()
                 {
                     Id = 10,
-                    From = GetRoom(8),
-                    To = GetRoom(10),
+                    FromId = (8),
+                    ToId = (10),
                     InsideDescription = "xxx",
                     OutsideDescription = "mutant",
                     Name = "][][][",
@@ -242,8 +316,8 @@ namespace TextGameCuevaCristales.Models
                 new Way()
                 {
                     Id = 11,
-                    From = GetRoom(10),
-                    To = GetRoom(11),
+                    FromId = (10),
+                    ToId = (11),
                     InsideDescription = "xxx",
                     OutsideDescription = "altar",
                     Name = "][][][",
@@ -252,8 +326,8 @@ namespace TextGameCuevaCristales.Models
                 new Way()
                 {
                     Id = 12,
-                    From = GetRoom(11),
-                    To = GetRoom(9),
+                    FromId = (11),
+                    ToId = (9),
                     InsideDescription = "xxx",
                     OutsideDescription = "prizrak",
                     Name = "][][][",
@@ -262,8 +336,8 @@ namespace TextGameCuevaCristales.Models
                 new Way()
                 {
                     Id = 13,
-                    From = GetRoom(12),
-                    To = GetRoom(5),
+                    FromId = (12),
+                    ToId = (5),
                     InsideDescription = "xxx",
                     OutsideDescription = "kom a",
                     Name = "][][][",
@@ -272,16 +346,69 @@ namespace TextGameCuevaCristales.Models
                 new Way()
                 {
                     Id = 14,
-                    From = GetRoom(3),
-                    To = GetRoom(4),
+                    FromId = (3),
+                    ToId = (4),
                     InsideDescription = "xxx",
                     OutsideDescription = "копье",
                     Name = "][][][",
                     ItemTag = ""
                 },
 
-
             };
+            var opt = new JsonSerializerOptions();
+            opt.WriteIndented = true;
+            opt.Encoder = System.Text.Encodings.Web.JavaScriptEncoder.Create(System.Text.Unicode.UnicodeRanges.All);
+            using (StreamWriter stringWriter = new StreamWriter("mapItems.json"))
+            {
+                string json = JsonSerializer.Serialize(Items, opt);
+                await stringWriter.WriteAsync(json);
+            }
+
+            using (StreamWriter stringWriter = new StreamWriter("mapEnds.json"))
+            {
+                string json = JsonSerializer.Serialize(Ends, opt);
+                await stringWriter.WriteAsync(json);
+            }
+
+            using (StreamWriter stringWriter = new StreamWriter("mapRooms.json"))
+            {
+                string json = JsonSerializer.Serialize(Rooms, opt);
+                await stringWriter.WriteAsync(json);
+            }
+
+            using (StreamWriter stringWriter = new StreamWriter("mapWays.json"))
+            {
+                string json = JsonSerializer.Serialize(Ways, opt);
+                await stringWriter.WriteAsync(json);
+            }
+
+            foreach (var room in Rooms)
+            {
+                if (room.ItemsId != null)
+                {
+                    room.Items = new List<Item>();
+                    foreach (var itemId in room.ItemsId)
+                    {
+                        room.Items.Add(GetItem(itemId));
+                    }
+                }
+                if (room.EndId != int.MinValue)
+                {
+                    room.End = GetEnd(room.EndId);
+                }
+            }
+
+            foreach (var way in Ways)
+            {
+                if (way.FromId != int.MinValue)
+                {
+                    way.From = GetRoom(way.FromId);
+                }
+                if (way.ToId != int.MinValue)
+                {
+                    way.To = GetRoom(way.ToId);
+                }
+            }
 
             Player = new Player()
             {
