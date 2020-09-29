@@ -1,0 +1,47 @@
+[
+  {
+    "Id": 1,
+    "Name": "Нападение бандита",
+    "Description": "На вас напал бандит с киркой.",
+    "ItemTag": "оружие",
+    "AvoidDescription": "Вы сумели отразить нападение бандита с помошью оружия.",
+    "LoseDescription": "Вас убил бандит.",
+    "IsAvoidence": true
+  },
+  {
+    "Id": 2,
+    "Name": "Нападение медведя",
+    "Description": "На вас напал разяренный медведь.",
+    "ItemTag": "копье",
+    "AvoidDescription": "Вы сумели заколоть это животное.",
+    "LoseDescription": "Вас задрал медведь.",
+    "IsAvoidence": true
+  },
+  {
+    "Id": 3,
+    "Name": "Нападение оборотня",
+    "Description": "На вас напал оборотень. Против него помог бы антидот. Оружие, похоже, бессильно.",
+    "ItemTag": "антидот",
+    "AvoidDescription": "Вы вкололи антидот и он превратился в человека, лег на пол и умер.",
+    "LoseDescription": "Вас задрал оборотень.",
+    "IsAvoidence": true
+  },
+  {
+    "Id": 4,
+    "Name": "Нападение призрака",
+    "Description": "На вас налетел призрак.",
+    "ItemTag": "вода",
+    "AvoidDescription": "Вы обрызгали его святой водой и он исчез.",
+    "LoseDescription": "Вас превратили в призрака.",
+    "IsAvoidence": true
+  },
+  {
+    "Id": 5,
+    "Name": "Спасение",
+    "Description": "Пред вами открылся путь на свододу.",
+    "ItemTag": null,
+    "AvoidDescription": null,
+    "LoseDescription": "Вы не думая выбегаете на свежий воздух.",
+    "IsAvoidence": true
+  }
+]

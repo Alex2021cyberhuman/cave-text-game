@@ -1,0 +1,32 @@
+[
+  {
+    "Id": 1,
+    "Tag": "копье оружие",
+    "Name": "Солдацкое копье",
+    "IsDestructible": true
+  },
+  {
+    "Id": 2,
+    "Tag": "топор оружие",
+    "Name": "Ржавыый топор",
+    "IsDestructible": true
+  },
+  {
+    "Id": 3,
+    "Tag": "keyA",
+    "Name": "Ключ от единственной двери закрытой на ключ",
+    "IsDestructible": false
+  },
+  {
+    "Id": 4,
+    "Tag": "антидот",
+    "Name": "Антидот",
+    "IsDestructible": true
+  },
+  {
+    "Id": 5,
+    "Tag": "вода",
+    "Name": "Святая вода",
+    "IsDestructible": true
+  }
+]

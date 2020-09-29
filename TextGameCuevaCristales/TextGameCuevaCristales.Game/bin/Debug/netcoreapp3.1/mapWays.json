@@ -1,0 +1,142 @@
+[
+  {
+    "Id": 1,
+    "Name": "][][][",
+    "OutsideDescription": "topoe",
+    "InsideDescription": "go",
+    "FromId": 1,
+    "ToId": 2,
+    "ItemTag": "",
+    "IsLocked": false
+  },
+  {
+    "Id": 2,
+    "Name": "][][][",
+    "OutsideDescription": "копье",
+    "InsideDescription": "xxx",
+    "FromId": 2,
+    "ToId": 3,
+    "ItemTag": "",
+    "IsLocked": false
+  },
+  {
+    "Id": 3,
+    "Name": "][][][",
+    "OutsideDescription": "разб",
+    "InsideDescription": "xxx",
+    "FromId": 2,
+    "ToId": 4,
+    "ItemTag": "топор",
+    "IsLocked": true
+  },
+  {
+    "Id": 4,
+    "Name": "][][][",
+    "OutsideDescription": "к комнате а",
+    "InsideDescription": "xxx",
+    "FromId": 4,
+    "ToId": 5,
+    "ItemTag": "топор",
+    "IsLocked": true
+  },
+  {
+    "Id": 5,
+    "Name": "][][][",
+    "OutsideDescription": "medved",
+    "InsideDescription": "xxx",
+    "FromId": 5,
+    "ToId": 6,
+    "ItemTag": "keyA",
+    "IsLocked": true
+  },
+  {
+    "Id": 6,
+    "Name": "][][][",
+    "OutsideDescription": "vihod",
+    "InsideDescription": "xxx",
+    "FromId": 6,
+    "ToId": 7,
+    "ItemTag": "",
+    "IsLocked": false
+  },
+  {
+    "Id": 7,
+    "Name": "][][][",
+    "OutsideDescription": "ant",
+    "InsideDescription": "xxx",
+    "FromId": 5,
+    "ToId": 8,
+    "ItemTag": "keyA",
+    "IsLocked": true
+  },
+  {
+    "Id": 8,
+    "Name": "][][][",
+    "OutsideDescription": "prizrak",
+    "InsideDescription": "xxx",
+    "FromId": 8,
+    "ToId": 9,
+    "ItemTag": "",
+    "IsLocked": false
+  },
+  {
+    "Id": 9,
+    "Name": "][][][",
+    "OutsideDescription": "kopie 2",
+    "InsideDescription": "xxx",
+    "FromId": 9,
+    "ToId": 12,
+    "ItemTag": "",
+    "IsLocked": false
+  },
+  {
+    "Id": 10,
+    "Name": "][][][",
+    "OutsideDescription": "mutant",
+    "InsideDescription": "xxx",
+    "FromId": 8,
+    "ToId": 10,
+    "ItemTag": "",
+    "IsLocked": false
+  },
+  {
+    "Id": 11,
+    "Name": "][][][",
+    "OutsideDescription": "altar",
+    "InsideDescription": "xxx",
+    "FromId": 10,
+    "ToId": 11,
+    "ItemTag": "",
+    "IsLocked": false
+  },
+  {
+    "Id": 12,
+    "Name": "][][][",
+    "OutsideDescription": "prizrak",
+    "InsideDescription": "xxx",
+    "FromId": 11,
+    "ToId": 9,
+    "ItemTag": "",
+    "IsLocked": false
+  },
+  {
+    "Id": 13,
+    "Name": "][][][",
+    "OutsideDescription": "kom a",
+    "InsideDescription": "xxx",
+    "FromId": 12,
+    "ToId": 5,
+    "ItemTag": "",
+    "IsLocked": false
+  },
+  {
+    "Id": 14,
+    "Name": "][][][",
+    "OutsideDescription": "копье",
+    "InsideDescription": "xxx",
+    "FromId": 3,
+    "ToId": 4,
+    "ItemTag": "",
+    "IsLocked": false
+  }
+]
