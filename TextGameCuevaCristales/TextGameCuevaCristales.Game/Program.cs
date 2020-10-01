@@ -1,15 +1,29 @@
 ﻿using System;
+using System.IO;
+using System.Threading.Tasks;
 using TextGameCuevaCristales.Models;
 
 namespace TextGameCuevaCristales.Game
 {
     class Program
     {
-        static async System.Threading.Tasks.Task Main()
+        static async Task Main()
         {
             Console.WriteLine("Hello World!");
             var game = new GameCycle();
-            await game.CreateCaveFromFiles("mapItems.json", "mapEnds.json", "mapRooms.json", "mapWays.json");
+            /*if (File.Exists("GameMap.json"))
+            {
+                game.GameMap = await GameMap.ReadFromFileAsync("GameMap.json");
+            }
+            else
+            {
+                game.GameMap.CreateExampleMap();
+                await game.GameMap.WriteToFileAsync("GameMap.json");
+            }*/
+            game.GameMap.CreateExampleMap();
+            await game.GameMap.WriteToFileAsync("GameMap.json");
+            game.GameMap.InitializeMap();
+            game.InitializePlayer();
             game.GamePlay();
         }
     }

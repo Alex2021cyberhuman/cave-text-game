@@ -4,6 +4,9 @@ using System.Text;
 
 namespace TextGameCuevaCristales.Models
 {
+    /// <summary>
+    /// Класс игрока, который можно сериализовать для сожранения данных
+    /// </summary>
     public class Player
     {
         public Room CurrentRoom { get; set; }

@@ -1,26 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
 
 namespace TextGameCuevaCristales.Models
 {
-    [Serializable]
+    /// <summary>
+    /// Представляет собой класс перехода между комнатами. По сути это ребро направленного графа.
+    /// Может быть открытым или запертым. Зависит от id предмета
+    /// </summary>
     public class Way
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string OutsideDescription { get; set; }
-        public string InsideDescription { get; set; }
-        public int FromId { get; set; } = int.MinValue;
-        [JsonIgnore]
-        public Room From { get; set; }
-        public int ToId { get; set; } = int.MinValue;
-        [JsonIgnore]
-        public Room To { get; set; }
-        public string ItemTag { get; set; }
-        public bool CompareTag(string tags) => tags.Contains(ItemTag);
+        /// <value>ID перехода</value>
+        public int Id { get; set; } = 0;
+        public string Name { get; set; } = string.Empty;
+        public string OutsideDescription { get; set; } = string.Empty;
+        public string InsideDescription { get; set; } = string.Empty;
+        /// <value>ID предмета необходимого для открытия перехода (двери к примеру)</value>
+        public int OpeningItemId { get; set; } = 0;
+        [JsonIgnore] public Item OpeningItem { get; set; } = null;
+        public int FromRoomId { get; set; } = 0;
+        [JsonIgnore] public Room ToRoom { get; set; } = null;
+        public int ToRoomId { get; set; } = 0;
+        [JsonIgnore] public Room FromRoom { get; set; } = null;
 
-        public bool IsLocked => ItemTag != "";
+        [JsonIgnore] public bool IsLocked => OpeningItemId != 0;
     }
 }
